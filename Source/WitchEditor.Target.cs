@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class AuraTarget : TargetRules
+public class WitchEditorTarget : TargetRules
 {
-	public AuraTarget(TargetInfo Target) : base(Target)
+	public WitchEditorTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
+		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 
-		ExtraModuleNames.AddRange( new string[] { "Aura" } );
+		ExtraModuleNames.AddRange( new string[] { "Witch" } );
 	}
 }

@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Aura.h"
+#include "Witch.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Aura, "Aura" );
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Witch, "Witch" );

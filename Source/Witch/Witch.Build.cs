@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class Aura : ModuleRules
+public class Witch : ModuleRules
 {
-	public Aura(ReadOnlyTargetRules Target) : base(Target)
+	public Witch(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
