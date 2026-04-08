@@ -13,5 +13,6 @@ UCLASS()
 class WITCH_API AWitchCharacter : public AWitchCharacterBase
 {
 	GENERATED_BODY()
-	
+public:
+	AWitchCharacter();
 };
