@@ -3,3 +3,12 @@
 
 #include "Character/WitchEnemy.h"
 
+void AWitchEnemy::HighLightActor()
+{
+	
+}
+
+void AWitchEnemy::UnHighLightActor()
+{
+	
+}
