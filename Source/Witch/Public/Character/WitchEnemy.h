@@ -15,6 +15,7 @@ class WITCH_API AWitchEnemy : public AWitchCharacterBase, public IEnemyInterface
 {
 	GENERATED_BODY()
 public:
+	AWitchEnemy();
 	virtual void HighLightActor() override;
 	virtual void UnHighLightActor() override;
 };
