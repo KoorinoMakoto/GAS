@@ -4,9 +4,17 @@
 #include "Player/WitchPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/EnemyInterface.h"
+
 AWitchPlayerController::AWitchPlayerController()
 {
 	bReplicates = true;
+}
+
+void AWitchPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	CursorTrace();
 }
 
 void AWitchPlayerController::BeginPlay()
@@ -50,4 +58,50 @@ void AWitchPlayerController::Move(const FInputActionValue& InputActionValue)
 		
 	}
 	
+}
+
+void AWitchPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility,false,CursorHit);
+	if (!CursorHit.bBlockingHit) return;
+	
+	LastActor = CurrentActor;
+	CurrentActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+	
+	/*
+	 *Line Trace from cursor 包含 5 种情况
+	 * A: LastActor == nullptr && CurrentActor == nullptr
+	 *	- Do nothing
+	 * B: LastActor == nullptr && CurrentActor != nullptr
+	 *  - Highlight	CurrentActor
+	 * C: LastActor != nullptr && CurrentActor == nullptr
+	 *	- UnHighlight LastACtor
+	 * D: Both != nullptr && LastActor != CurrentActor
+	 *  - UnHighlight LastActor , Highlight CurrentActor
+	 * E: Both != nullptr && LastActor == CurrentActor
+	 *  - Do Nothing
+	 */
+	if (LastActor == nullptr)
+	{
+		if (CurrentActor != nullptr)// Case B
+		{
+			CurrentActor->HighLightActor();
+		}
+	}
+	else
+	{
+		if (CurrentActor == nullptr)// Case C
+		{
+			LastActor->UnHighLightActor();
+		}
+		else
+		{
+			if (LastActor != CurrentActor)// Case D
+			{
+				LastActor->UnHighLightActor();
+				CurrentActor->HighLightActor();
+			}
+		}
+	}
 }
