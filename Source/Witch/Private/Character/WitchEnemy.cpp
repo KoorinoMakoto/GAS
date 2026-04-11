@@ -3,12 +3,17 @@
 
 #include "Character/WitchEnemy.h"
 
+#include "AbilitySystem/WitchAbilitySystemComponent.h"
+#include "AbilitySystem/WitchAttributeSet.h"
 #include "Witch/Witch.h"
 
 AWitchEnemy::AWitchEnemy()
 {
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
+	AbilitySystemComponent = CreateDefaultSubobject<UWitchAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
 	
+	AttributeSet  = CreateDefaultSubobject<UWitchAttributeSet>("AttributeSet");
 }
 
 void AWitchEnemy::HighLightActor()
