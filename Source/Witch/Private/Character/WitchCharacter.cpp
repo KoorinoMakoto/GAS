@@ -3,7 +3,9 @@
 
 #include "Character/WitchCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/WitchPlayerState.h"
 
 AWitchCharacter::AWitchCharacter()
 {
@@ -15,4 +17,31 @@ AWitchCharacter::AWitchCharacter()
 	bUseControllerRotationPitch = false;//不使用控制器旋转
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+}
+
+void AWitchCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	//Init ability actor info for the server
+	InitAbilityActorInfo();
+	
+}
+
+void AWitchCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	//Init ability info for the client
+	InitAbilityActorInfo();
+}
+
+void AWitchCharacter::InitAbilityActorInfo()
+{
+	AWitchPlayerState* WitchPlayerState = GetPlayerState<AWitchPlayerState>();
+	check(WitchPlayerState);
+	WitchPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(WitchPlayerState,this);
+	
+	AbilitySystemComponent = WitchPlayerState->GetAbilitySystemComponent();
+	AttributeSet = WitchPlayerState->GetAttributeSet();
 }

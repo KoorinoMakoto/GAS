@@ -17,6 +17,12 @@ AWitchEnemy::AWitchEnemy()
 	AttributeSet  = CreateDefaultSubobject<UWitchAttributeSet>("AttributeSet");
 }
 
+void AWitchEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	AbilitySystemComponent->InitAbilityActorInfo(this,this);
+}
+
 void AWitchEnemy::HighLightActor()
 {
 	GetMesh()->SetRenderCustomDepth(true);

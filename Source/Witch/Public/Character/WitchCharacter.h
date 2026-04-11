@@ -15,4 +15,8 @@ class WITCH_API AWitchCharacter : public AWitchCharacterBase
 	GENERATED_BODY()
 public:
 	AWitchCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+private:
+	void InitAbilityActorInfo();
 };
