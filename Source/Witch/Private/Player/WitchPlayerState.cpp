@@ -12,6 +12,7 @@ AWitchPlayerState::AWitchPlayerState()
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UWitchAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 	
 	AttributeSet  = CreateDefaultSubobject<UWitchAttributeSet>("AttributeSet");
 }

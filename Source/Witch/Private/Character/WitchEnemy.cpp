@@ -12,6 +12,7 @@ AWitchEnemy::AWitchEnemy()
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
 	AbilitySystemComponent = CreateDefaultSubobject<UWitchAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	
 	AttributeSet  = CreateDefaultSubobject<UWitchAttributeSet>("AttributeSet");
 }
