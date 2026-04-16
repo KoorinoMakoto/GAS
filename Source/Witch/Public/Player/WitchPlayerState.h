@@ -19,7 +19,7 @@ class WITCH_API AWitchPlayerState : public APlayerState,public IAbilitySystemInt
 	GENERATED_BODY()
 public:
 	AWitchPlayerState();
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;//来自IAbilitySystemInterface
 	UAttributeSet* GetAttributeSet() const{ return AttributeSet; };
 protected:
 	UPROPERTY()
