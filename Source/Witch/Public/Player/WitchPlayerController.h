@@ -34,6 +34,7 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 	
 	void CursorTrace();
+	//Error C2338 : static_assert failed: 'TObjectPtr<T> can only be used with types derived from UObject'
 	IEnemyInterface* LastActor;
 	IEnemyInterface* CurrentActor;
 	

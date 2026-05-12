@@ -23,8 +23,12 @@ void AWitchPlayerController::BeginPlay()
 	check(WitchContext);
 	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(WitchContext,0);
+	//只有在本地控制的机器并且有有效的local player时，Subsystem才有效，我们不希望游戏因此崩溃，因此不应该使用（断言assert）: check(Subsystem);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(WitchContext,0);
+	}
+	
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;

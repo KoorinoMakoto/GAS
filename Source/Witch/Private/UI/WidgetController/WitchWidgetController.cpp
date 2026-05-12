@@ -3,3 +3,10 @@
 
 #include "UI/WidgetController/WitchWidgetController.h"
 
+void UWitchWidgetController::SetWidgetControllerParams(const FWidgetControllerParams& WCParams)
+{
+	PlayerController = WCParams.PlayerController;
+	PlayerState = WCParams.PlayerState;
+	AbilitySystemComponent = WCParams.AbilitySystemComponent;
+	AttributeSet = WCParams.AttributeSet;
+}

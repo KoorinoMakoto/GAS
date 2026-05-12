@@ -5,11 +5,35 @@
 
 #include "Blueprint/UserWidget.h"
 #include "UI/Widget/WitchUserWidget.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 
-void AWitchHUD::BeginPlay()
+UOverlayWidgetController* AWitchHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
-	Super::BeginPlay();
-	
+	if (OverlayWidgetController == nullptr)
+	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
+		OverlayWidgetController->SetWidgetControllerParams(WCParams);
+	}
+	return OverlayWidgetController;
+}
+
+void AWitchHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
+{
+	checkf(OverlayWidgetClass,TEXT("Overlay Widget Class uninitialized, fill out BP_WItchHUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, fill out BP_WItchHUD"));
+	//创建OverlayWidget
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(),OverlayWidgetClass);
+	OverlayWidget = Cast<UWitchUserWidget>(Widget);
+	//OverlayWidget = CreateWidget<UWitchUserWidget>(GetWorld(),OverlayWidgetClass);
+	//创建OverlayWidgetController
+	const FWidgetControllerParams WidgetControllerParams(PC,PS,ASC,AS);
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
+	
+	//将WidgetController设置到 OverlayWidget上
+	OverlayWidget->SetWidgetController(WidgetController);
+	
+	//OverlayWidget->AddToViewport();
 	Widget->AddToViewport();
 }
+
+
