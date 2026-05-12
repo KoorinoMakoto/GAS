@@ -31,6 +31,8 @@ void AWitchHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySys
 	
 	//将WidgetController设置到 OverlayWidget上
 	OverlayWidget->SetWidgetController(WidgetController);
+	//此处是广播初始值的时机
+	WidgetController->BroadcastInitialValues();
 	
 	//OverlayWidget->AddToViewport();
 	Widget->AddToViewport();

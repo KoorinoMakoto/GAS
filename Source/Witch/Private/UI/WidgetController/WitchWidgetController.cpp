@@ -10,3 +10,8 @@ void UWitchWidgetController::SetWidgetControllerParams(const FWidgetControllerPa
 	AbilitySystemComponent = WCParams.AbilitySystemComponent;
 	AttributeSet = WCParams.AttributeSet;
 }
+
+void UWitchWidgetController::BroadcastInitialValues()
+{
+	
+}

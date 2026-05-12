@@ -2,6 +2,8 @@
 
 #pragma once
 
+// 所有 WidgetController 的基础类
+
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "WitchWidgetController.generated.h"
@@ -42,6 +44,8 @@ class WITCH_API UWitchWidgetController : public UObject
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
+	//任何继承了 WitchWIdgetController 的 widgetController 都能通过这个函数来广播自己独有的初始值
+	virtual void BroadcastInitialValues();
 protected:
 	
 	UPROPERTY(BlueprintReadOnly,Category="WidgetController")
