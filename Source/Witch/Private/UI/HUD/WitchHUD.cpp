@@ -13,6 +13,8 @@ UOverlayWidgetController* AWitchHUD::GetOverlayWidgetController(const FWidgetCon
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
+		//绑定委托
+		OverlayWidgetController->BindCallbacksToDependencies();
 	}
 	return OverlayWidgetController;
 }

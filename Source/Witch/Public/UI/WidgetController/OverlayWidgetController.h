@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/WitchAttributeSet.h"
 #include "UI/WidgetController/WitchWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 //动态多播委托，广播浮点数，专门针对生命值
@@ -21,6 +22,8 @@ class WITCH_API UOverlayWidgetController : public UWitchWidgetController
 	GENERATED_BODY()
 public:
 	virtual void BroadcastInitialValues() override;
+	virtual void BindCallbacksToDependencies() override;
+	
 	//FOnHealthChangedSignature是委托类型，OnHealthChanged才是真正的委托对象
 	//BlueprintAssignable代表我们可以在蓝图中进行绑定
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
@@ -28,4 +31,9 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnMaxHealthChangedSignature OnMaxHealthChanged;
+	
+protected:
+	//委托对应的回调函数，需要满足函数签名要求
+	void HealthChanged(const FOnAttributeChangeData& Data) const;
+	void MaxHealthChanged(const FOnAttributeChangeData& Data) const;
 };

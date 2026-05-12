@@ -15,3 +15,8 @@ void UWitchWidgetController::BroadcastInitialValues()
 {
 	
 }
+
+void UWitchWidgetController::BindCallbacksToDependencies()
+{
+	
+}
