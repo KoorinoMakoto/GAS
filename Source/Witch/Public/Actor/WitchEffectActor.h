@@ -17,17 +17,19 @@ public:
 	// Sets default values for this actor's properties
 	AWitchEffectActor();
 	
-	
+
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+	//进入蓝图，在创建具体的游戏效果后，调用
 	UFUNCTION(BlueprintCallable)
-	void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
 	//实现即时游戏效果,能在蓝图中设置
-	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	//EditAnywhere + BlueprintReadOnly 是 UE 开发中最标准、最常用的黄金组合之一。
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass; 
 
 };

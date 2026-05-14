@@ -26,10 +26,10 @@ void AWitchEffectActor::BeginPlay()
 	
 }
 
-void AWitchEffectActor::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+void AWitchEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
 	//IAbilitySystemInterface* ASCInterface = Cast<IAbilitySystemInterface>(Target);
-	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target);
+	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 	if (TargetASC == nullptr) return;
 	
 	check(GameplayEffectClass);
