@@ -28,6 +28,8 @@ void AWitchEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		const UWitchAttributeSet* WitchAttributeSet = Cast<UWitchAttributeSet>(ASCInterface->GetAbilitySystemComponent()->GetAttributeSet(UWitchAttributeSet::StaticClass()));
 		UWitchAttributeSet* MutableWitchAttributes = const_cast<UWitchAttributeSet*>(WitchAttributeSet); 
 		MutableWitchAttributes->SetHealth(WitchAttributeSet->GetHealth()+25.f);
+		//测试用
+		MutableWitchAttributes->SetMana(WitchAttributeSet->GetMana()-25.f);
 		Destroy();
 	}
 }
