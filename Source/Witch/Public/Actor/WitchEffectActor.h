@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "WitchEffectActor.generated.h"
 
-class USphereComponent;
+class UGameplayEffect;
 
 UCLASS()
 class WITCH_API AWitchEffectActor : public AActor
@@ -17,20 +17,17 @@ public:
 	// Sets default values for this actor's properties
 	AWitchEffectActor();
 	
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherOverlappedComponent,int32 OtherBodyIndex,bool bFromSweep,const FHitResult& SweepResult);
-
-	UFUNCTION()
-	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-private:
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere; 
 	
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+	
+	//实现即时游戏效果,能在蓝图中设置
+	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass; 
+
 };
