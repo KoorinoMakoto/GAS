@@ -31,5 +31,8 @@ protected:
 	//EditAnywhere + BlueprintReadOnly 是 UE 开发中最标准、最常用的黄金组合之一。
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass; 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass; 
 
 };
