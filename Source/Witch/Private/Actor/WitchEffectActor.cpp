@@ -40,5 +40,15 @@ void AWitchEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGa
 	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 }
 
+void AWitchEffectActor::OnOverlap(AActor* TargetActor)
+{
+	
+}
+
+void AWitchEffectActor::OnEndOverlap(AActor* TargetActor)
+{
+	
+}
+
 
 
