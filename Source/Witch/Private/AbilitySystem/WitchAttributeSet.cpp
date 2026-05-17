@@ -24,6 +24,23 @@ void UWitchAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,MaxMana,COND_None,REPNOTIFY_Always);
 	
 }
+
+//只要属性发生改变，就会触发，“Pre”代表触发时机是属性值真正改变之前，不过该函数只建议用于clamp数值的边界
+void UWitchAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const
+{
+	Super::PreAttributeBaseChange(Attribute, NewValue);
+	
+	if (Attribute == GetHealthAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	}
+	
+	if (Attribute == GetManaAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+	}
+}
+
 //属性回调函数
 void UWitchAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
 {

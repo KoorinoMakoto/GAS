@@ -25,6 +25,9 @@ public:
 	//注册网络同步逻辑
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	
+	//继承自UAttributeSet
+	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
+	
 	//ReplicatedUsing：告诉引擎，当服务器上的 Health 发生变化并同步到客户端时，客户端不要只悄悄更新数值，还要触发 OnRep_Health 这个函数。
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health,Category="Vital Attributes")
 	//在 GAS 中，所有属性都必须是 FGameplayAttributeData 结构体，这个结构体内部其实维护了两个值：BaseValue（基础值）和 CurrentValue（当前值）。
