@@ -36,7 +36,7 @@ void AWitchEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGa
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
 	//有些项目会省略变量名：EffectSpecHandle 中的 “Handle”
-	const FGameplayEffectSpecHandle EffectSpecHandle =  TargetASC->MakeOutgoingSpec(GameplayEffectClass,1.f,EffectContextHandle);
+	const FGameplayEffectSpecHandle EffectSpecHandle =  TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel,EffectContextHandle);
 	//将ApplyGameplayEffectSpecToSelf返回的FActiveGameplayEffectHandle存储在局部变量ActiveEffectHandle中，主要是Infinite需要使用
 	const FActiveGameplayEffectHandle ActiveEffectHandle =  TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 	

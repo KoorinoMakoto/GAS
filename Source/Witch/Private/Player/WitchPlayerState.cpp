@@ -8,8 +8,8 @@
 
 AWitchPlayerState::AWitchPlayerState()
 {
-	NetUpdateFrequency = 100.f;//服务器更新数据到客户端的频率
-	
+	//NetUpdateFrequency = 100.f;
+	SetNetUpdateFrequency(100.f);//服务器更新数据到客户端的频率
 	AbilitySystemComponent = CreateDefaultSubobject<UWitchAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
