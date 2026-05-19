@@ -4,6 +4,7 @@
 #include "Character/WitchCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/WitchAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/WitchPlayerController.h"
 #include "Player/WitchPlayerState.h"
@@ -43,6 +44,7 @@ void AWitchCharacter::InitAbilityActorInfo()
 	AWitchPlayerState* WitchPlayerState = GetPlayerState<AWitchPlayerState>();
 	check(WitchPlayerState);
 	WitchPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(WitchPlayerState,this);
+	Cast<UWitchAbilitySystemComponent>(WitchPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	
 	AbilitySystemComponent = WitchPlayerState->GetAbilitySystemComponent();
 	AttributeSet = WitchPlayerState->GetAttributeSet();

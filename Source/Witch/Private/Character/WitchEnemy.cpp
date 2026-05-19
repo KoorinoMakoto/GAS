@@ -20,7 +20,13 @@ AWitchEnemy::AWitchEnemy()
 void AWitchEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	InitAbilityActorInfo();
+}
+
+void AWitchEnemy::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this,this);
+	Cast<UWitchAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
 
 void AWitchEnemy::HighLightActor()

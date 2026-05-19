@@ -27,4 +27,8 @@ void AWitchCharacterBase::BeginPlay()
 	
 }
 
+void AWitchCharacterBase::InitAbilityActorInfo()
+{
+}
+
 

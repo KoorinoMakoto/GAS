@@ -32,4 +32,6 @@ protected:
 	
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+	//InitAbilityActorInfo 在 AbilitySystemComponent_Abilities.cpp里有同名函数，但两者并不相同
+	virtual void InitAbilityActorInfo();
 };

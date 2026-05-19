@@ -16,10 +16,14 @@ class WITCH_API AWitchEnemy : public AWitchCharacterBase, public IEnemyInterface
 	GENERATED_BODY()
 public:
 	AWitchEnemy();
-	virtual void BeginPlay() override;
+	
 	
 	/* enemy interface*/
 	virtual void HighLightActor() override;
 	virtual void UnHighLightActor() override;
 	/* enemy interface end*/
+	
+protected:
+	virtual void BeginPlay() override;
+	virtual void InitAbilityActorInfo() override;
 };
