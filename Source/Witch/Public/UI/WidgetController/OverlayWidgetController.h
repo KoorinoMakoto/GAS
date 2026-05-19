@@ -72,4 +72,16 @@ protected:
 	
 	void ManaChanged(const FOnAttributeChangeData& Data) const;
 	void MaxManaChanged(const FOnAttributeChangeData& Data) const;
+	
+	//无论行类型如何，都能找到数据表中的某一行并返回该行
+	template<typename T>
+	T* GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag);
 };
+
+template <typename T>
+T* UOverlayWidgetController::GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag)
+{
+	//根据 RowName 查找，而 RowName 和 Tag 是相同的
+	T* Row = DataTable->FindRow<T>(Tag.GetTagName(),TEXT(""));
+	return Row;
+}
