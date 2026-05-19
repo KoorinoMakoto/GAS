@@ -6,6 +6,9 @@
 #include "AbilitySystemComponent.h"
 #include "WitchAbilitySystemComponent.generated.h"
 
+//供 WidgetController 绑定
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /* AssetTags */);
+
 /**
  * 
  */
@@ -19,6 +22,7 @@ public:
 	//此时也代表可以绑定委托了
 	void AbilityActorInfoSet();
 	
+	FEffectAssetTags EffectAssetTags;
 protected:
 	//FOnGameplayEffectAppliedDelegate的回调函数
 	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle);

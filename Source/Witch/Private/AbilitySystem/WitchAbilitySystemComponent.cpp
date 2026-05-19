@@ -18,9 +18,7 @@ void UWitchAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* Abilit
 	//不使用GrantedTags，而是使用AssetTags，后者可以传递标签：这些标签是我们在效果应用时希望获取到的
 	EffectSpec.GetAllAssetTags(TagContainer);
 	
-	for (const FGameplayTag& Tag : TagContainer)
-	{
-		//TODO: Broadcast the tag to the Widget Controller
-		
-	}
+	EffectAssetTags.Broadcast(TagContainer);
+	
+	
 }
