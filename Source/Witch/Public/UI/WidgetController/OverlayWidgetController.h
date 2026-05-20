@@ -6,15 +6,6 @@
 #include "AbilitySystem/WitchAttributeSet.h"
 #include "UI/WidgetController/WitchWidgetController.h"
 #include "OverlayWidgetController.generated.h"
-class UWitchUserWidget;
-//动态多播委托，广播浮点数，专门针对生命值
-//定义了一个名为 FOnHealthChangedSignature 的委托类型，该委托可以绑定多个函数，并在触发时传递一个 float 类型的参数（代表新生命值）。
-//可以在蓝图中被绑定和广播
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewMana);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana);
 
 USTRUCT(BlueprintType)
 struct FUIWidgetRow : public FTableRowBase
@@ -29,11 +20,25 @@ struct FUIWidgetRow : public FTableRowBase
 	FText Message = FText();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UWitchUserWidget> MessageWidget;
+	TSubclassOf<class UWitchUserWidget> MessageWidget;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UTexture2D* Image = nullptr;
 };
+
+class UWitchUserWidget;
+//动态多播委托，广播浮点数，专门针对生命值
+//定义了一个名为 FOnHealthChangedSignature 的委托类型，该委托可以绑定多个函数，并在触发时传递一个 float 类型的参数（代表新生命值）。
+//可以在蓝图中被绑定和广播
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewMana);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
+
+
 
 /**
  * 
@@ -60,6 +65,9 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnMaxManaChangedSignature OnMaxManaChanged;
+	
+	UPROPERTY(BlueprintAssignable, Category="GAS|Messages")
+	FMessageWidgetRowSignature MessageWidgetRowDelegate;
 	
 protected:
 	

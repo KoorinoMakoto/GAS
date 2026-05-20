@@ -34,16 +34,25 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		{
 			for (const FGameplayTag& Tag : AssetTags)
 			{
-				const FString Msg = FString::Printf(TEXT("Tag: %s"), *Tag.ToString());
-				GEngine->AddOnScreenDebugMessage(-1,8.f,FColor::Blue,Msg);
+				//"A.1".MatchesTag("A") will return True, "A".MatchesTag("A.1") will return False
+				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+				//只有在Tag是Message类型的Tag时才进行广播
+				if (Tag.MatchesTag(MessageTag))
+				{
+					const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+					MessageWidgetRowDelegate.Broadcast(*Row);
+				}
 				
-				FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+				// const FString Msg = FString::Printf(TEXT("Tag: %s"), *Tag.ToString());
+				// GEngine->AddOnScreenDebugMessage(-1,8.f,FColor::Blue,Msg);
+				
+				
 			}
 		}	
 	);
 }
 
-//回调函数，生命值变化的时候，调用动态多播委托的广播，而对应的回调函数在蓝图中绑定
+//回调函数，生命值变化的时候，调用动态多播委托的广播，而对应的回调函数在蓝图中绑定,即WBP_HealthGlobe和WBP_ManaGlobe中,需要先获取WidgetController才能绑定其中的委托
 void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data) const
 {
 	OnHealthChanged.Broadcast(Data.NewValue);
@@ -53,7 +62,7 @@ void UOverlayWidgetController::MaxHealthChanged(const FOnAttributeChangeData& Da
 {
 	OnMaxHealthChanged.Broadcast(Data.NewValue);
 }
-//回调函数，法力值变化的时候，调用动态多播委托的广播，而对应的回调函数在蓝图中绑定
+//回调函数，法力值变化的时候，调用动态多播委托的广播，而对应的回调函数在蓝图中绑定，即WBP_HealthGlobe和WBP_ManaGlobe中
 void UOverlayWidgetController::ManaChanged(const FOnAttributeChangeData& Data) const
 {
 	OnManaChanged.Broadcast(Data.NewValue);
