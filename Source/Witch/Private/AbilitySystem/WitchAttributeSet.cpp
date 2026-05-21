@@ -31,6 +31,7 @@ void UWitchAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 //只要属性发生改变，就会触发，“Pre”代表触发时机是属性值真正改变之前，不过该函数只建议用于clamp数值的边界
 void UWitchAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const
 {
+	//只能对 从 modifier 查询到的返回值进行 clamp？但实际上 5.6 版本并没有这个 bug
 	Super::PreAttributeBaseChange(Attribute, NewValue);
 	
 	if (Attribute == GetHealthAttribute())
@@ -91,6 +92,16 @@ void UWitchAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectM
 	
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
+	
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	}
+	
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+	}
 	
 }
 
