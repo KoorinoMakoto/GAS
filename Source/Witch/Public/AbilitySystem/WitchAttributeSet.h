@@ -65,6 +65,27 @@ public:
 	
 	 virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 	
+	/*
+	 * Primary Attributes
+	 */
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Strength,Category="Primary Attributes")
+	FGameplayAttributeData Strength;
+	ATTRIBUTE_ACCESSORS(UWitchAttributeSet, Strength)
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Intelligence,Category="Primary Attributes")
+	FGameplayAttributeData Intelligence;
+	ATTRIBUTE_ACCESSORS(UWitchAttributeSet, Intelligence)
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Resilience,Category="Primary Attributes")
+	FGameplayAttributeData Resilience;
+	ATTRIBUTE_ACCESSORS(UWitchAttributeSet, Resilience)
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Vigor,Category="Primary Attributes")
+	FGameplayAttributeData Vigor;
+	ATTRIBUTE_ACCESSORS(UWitchAttributeSet, Vigor)
+	/*
+	 * Vital Attributes
+	 */
 	//ReplicatedUsing：告诉引擎，当服务器上的 Health 发生变化并同步到客户端时，客户端不要只悄悄更新数值，还要触发 OnRep_Health 这个函数。
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health,Category="Vital Attributes")
 	//在 GAS 中，所有属性都必须是 FGameplayAttributeData 结构体，这个结构体内部其实维护了两个值：BaseValue（基础值）和 CurrentValue（当前值）。
@@ -95,6 +116,18 @@ public:
 	
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+	
+	UFUNCTION()
+	void OnRep_Strength(const FGameplayAttributeData& OldStrength) const;
+	
+	UFUNCTION()
+	void OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const;
+	
+	UFUNCTION()
+	void OnRep_Resilience(const FGameplayAttributeData& OldResilience) const;
+	
+	UFUNCTION()
+	void OnRep_Vigor(const FGameplayAttributeData& OldVigor) const;
 	
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;

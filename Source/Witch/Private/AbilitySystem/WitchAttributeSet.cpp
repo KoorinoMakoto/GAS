@@ -26,6 +26,11 @@ void UWitchAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,Mana,COND_None,REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,MaxMana,COND_None,REPNOTIFY_Always);
 	
+	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,Strength,COND_None,REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,Intelligence,COND_None,REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,Resilience,COND_None,REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UWitchAttributeSet,Vigor,COND_None,REPNOTIFY_Always);
+	
 }
 
 //只要属性发生改变，就会触发，“Pre”代表触发时机是属性值真正改变之前，不过该函数只建议用于clamp数值的边界
@@ -125,4 +130,24 @@ void UWitchAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
 void UWitchAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UWitchAttributeSet,MaxMana, OldMaxMana);
+}
+
+void UWitchAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldStrength) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UWitchAttributeSet, Strength, OldStrength);
+}
+
+void UWitchAttributeSet::OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UWitchAttributeSet, Intelligence, OldIntelligence);
+}
+
+void UWitchAttributeSet::OnRep_Resilience(const FGameplayAttributeData& OldResilience) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UWitchAttributeSet, Resilience, OldResilience);
+}
+
+void UWitchAttributeSet::OnRep_Vigor(const FGameplayAttributeData& OldVigor) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UWitchAttributeSet, Vigor, OldVigor);
 }
